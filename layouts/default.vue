@@ -1,13 +1,15 @@
 <template>
-  <el-container>
+  <div>
     <el-header>
       <app-navigation />
     </el-header>
-    <el-main>
-      <nuxt />
-    </el-main>
-    <el-footer />
-  </el-container>
+    <el-container>
+      <el-main>
+        <nuxt />
+      </el-main>
+      <el-footer />
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -20,6 +22,8 @@
   }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  header {
+    padding: 0;
+  }
 </style>
