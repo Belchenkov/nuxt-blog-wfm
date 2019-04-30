@@ -31,7 +31,8 @@
     export default {
       methods: {
         openPost () {
-          console.log('open');
+          const id = '1';
+          this.$router.push(`/post/${id}`);
         }
       }
     }
