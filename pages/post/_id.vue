@@ -36,7 +36,10 @@
           nesciunt nostrum nulla omnis pariatur provident quia quod reiciendis suscipit tempora tenetur ullam.</p>
       </main>
       <footer>
-        <app-comment-form />
+        <app-comment-form
+          @created="createCommentHandler"
+          v-if="canAddComment"
+        />
         <div class="comments" v-if="true">
           <app-comment
             v-for="comment in 4"
@@ -60,6 +63,16 @@
         components: {
           AppComment,
           AppCommentForm
+        },
+       data () {
+          return {
+            canAddComment: true
+          }
+       },
+        methods: {
+          createCommentHandler() {
+            this.canAddComment = false;
+          }
         }
     }
 </script>
