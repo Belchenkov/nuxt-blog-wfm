@@ -22,6 +22,23 @@
       />
     </el-form-item>
 
+    <el-button
+      class="mb"
+      type="info"
+      plain
+      icon="el-icon-view"
+      @click="previewDialog = true"
+    >
+      Предпросмотр
+    </el-button>
+
+    <el-dialog title="Предпросмотр" :visible.sync="previewDialog">
+      <div :key="controls.text">
+        <vue-markdown>{{controls.text}}</vue-markdown>
+      </div>
+    </el-dialog>
+
+
     <el-form-item>
       <el-button
         type="primary"
@@ -44,6 +61,7 @@
     data() {
       return {
         loading: false,
+        previewDialog: false,
         controls: {
           title: '',
           text: ''
