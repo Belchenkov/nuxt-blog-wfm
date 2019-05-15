@@ -72,6 +72,9 @@
           case 'logout':
             this.$message.success('Вы успешно вышли из системы.');
             break;
+          case 'session':
+            this.$message.warning('Время сессии истекло, войдите заново.');
+            break;
         }
       },
       methods: {
