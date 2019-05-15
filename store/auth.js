@@ -1,5 +1,5 @@
 export const state = () => ({
-  token: true
+  token: null
 });
 
 export const mutations = {
@@ -30,13 +30,16 @@ export const actions = {
     }
   },
   setToken({commit}, token) {
+    this.$axios.setToken(token, 'Bearer');
     commit('setToken', token);
   },
   logout({commit}) {
+    this.$axios.setToken(false);
     commit('clearToken');
   }
 };
 
 export const getters = {
-  isAuthenticated: state => Boolean(state.token)
+  isAuthenticated: state => Boolean(state.token),
+  token: state => state.token
 };
