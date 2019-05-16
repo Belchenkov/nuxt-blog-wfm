@@ -49,8 +49,8 @@ router.get('/', ctr.getAll);
 // /api/get/:id
 router.get('/:id', ctr.getById);
 
-// /api/put/:id
-router.put('/:id', ctr.addView);
+// /api/put/add/view/:id
+router.put('/add/view/:id', ctr.addView);
 
 
 module.exports = router;

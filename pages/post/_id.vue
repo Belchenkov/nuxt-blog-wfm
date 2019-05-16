@@ -2,7 +2,7 @@
     <article class="post">
       <header class="post-header">
         <div class="post-title">
-          <h1>Post Title</h1>
+          <h1>{{post.title}}</h1>
           <nuxt-link to="/">
             <i class="el-icon-back"></i>
           </nuxt-link>
@@ -10,40 +10,33 @@
         <div class="post-info">
           <small>
             <i class="el-icon-time"></i>
-            {{ new Date().toLocaleString() }}
+            {{ new Date(post.date).toLocaleString() }}
           </small>
           <small>
-            <i class="el-icon-view"></i> 42
+            <i class="el-icon-view"></i> {{post.views}}
           </small>
         </div>
         <div class="post-image">
           <img
-            src="https://www.hostinger.ru/rukovodstva/wp-content/uploads/sites/8/2018/08/chto-takoe-javascript.jpg"
+            :src="post.imageUrl"
             alt="js"
             class="post-image"
           >
         </div>
       </header>
       <main class="post-content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet aspernatur consequuntur
-          cum cupiditate dolorem dolorum eaque earum eius eveniet ex expedita incidunt ipsum itaque magni necessitatibus,
-          nesciunt nostrum nulla omnis pariatur provident quia quod reiciendis suscipit tempora tenetur ullam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet aspernatur consequuntur
-          cum cupiditate dolorem dolorum eaque earum eius eveniet ex expedita incidunt ipsum itaque magni necessitatibus,
-          nesciunt nostrum nulla omnis pariatur provident quia quod reiciendis suscipit tempora tenetur ullam.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet aspernatur consequuntur
-          cum cupiditate dolorem dolorum eaque earum eius eveniet ex expedita incidunt ipsum itaque magni necessitatibus,
-          nesciunt nostrum nulla omnis pariatur provident quia quod reiciendis suscipit tempora tenetur ullam.</p>
+        <vue-markdown>{{post.text}}</vue-markdown>
       </main>
       <footer>
         <app-comment-form
           @created="createCommentHandler"
           v-if="canAddComment"
+          :postId="post._id"
         />
-        <div class="comments" v-if="true">
+        <div class="comments" v-if="post.comments.length">
           <app-comment
-            v-for="comment in 4"
-            :key="comment"
+            v-for="comment in post.comments"
+            :key="comment._id"
             :comment="comment"
           />
         </div>
@@ -60,6 +53,13 @@
         validate({params}) {
           return Boolean(params.id);
         },
+        async asyncData({store, params}) {
+          const post = await store.dispatch('post/fetchById', params.id);
+          await store.dispatch('post/addView', post);
+          return {
+            post: {...post, views: ++post.views}
+          };
+        },
         components: {
           AppComment,
           AppCommentForm
@@ -70,7 +70,8 @@
           }
        },
         methods: {
-          createCommentHandler() {
+          createCommentHandler(comment) {
+            this.post.comments.unshift(comment);
             this.canAddComment = false;
           }
         }

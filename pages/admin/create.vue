@@ -9,14 +9,14 @@
 
     <el-form-item label="Введите название поста" prop="title">
       <el-input
-        v-model.trim="controls.title"
+        v-model="controls.title"
       />
     </el-form-item>
 
     <el-form-item label="Текст в формате .md или .html" prop="text">
       <el-input
         type="textarea"
-        v-model.trim="controls.text"
+        v-model="controls.text"
         resize="none"
         :rows="10"
       />

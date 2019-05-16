@@ -7,11 +7,11 @@
     >
       <h1>Добавить комментарий</h1>
       <el-form-item label="Ваше имя" prop="name">
-        <el-input v-model.trim="controls.name" />
+        <el-input v-model="controls.name" />
       </el-form-item>
       <el-form-item label="Текст комментария" prop="text">
         <el-input
-          v-model.trim="controls.text"
+          v-model="controls.text"
           type="textarea"
           resize="none"
           :rows="4"
@@ -30,6 +30,12 @@
 
 <script>
     export default {
+      props: {
+        postId: {
+          type: String,
+          required: true
+        }
+      },
       data () {
         return {
           loading: false,
@@ -49,19 +55,20 @@
       },
       methods: {
         onSubmit () {
-          this.$refs.form.validate(valid => {
+          this.$refs.form.validate(async valid => {
             if (valid) {
               this.loading = true;
 
               const formData = {
                 name: this.controls.name,
                 text: this.controls.text,
-                postId: ''
+                postId: this.postId
               };
 
               try {
+                const newComment = await this.$store.dispatch('comment/create', formData);
                 this.$message.success('Комментарий добавлен');
-                this.$emit('created');
+                this.$emit('created', newComment);
               } catch (e) {
                 this.loading = false;
               }
