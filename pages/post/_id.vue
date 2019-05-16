@@ -31,6 +31,7 @@
         <app-comment-form
           @created="createCommentHandler"
           v-if="canAddComment"
+          :postId="post._id"
         />
         <div class="comments" v-if="post.comments.length">
           <app-comment
@@ -69,7 +70,8 @@
           }
        },
         methods: {
-          createCommentHandler() {
+          createCommentHandler(comment) {
+            this.post.comments.unshift(comment);
             this.canAddComment = false;
           }
         }
