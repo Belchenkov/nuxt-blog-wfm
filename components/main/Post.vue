@@ -5,23 +5,24 @@
     class="post"
   >
     <header slot="header" class="post-header">
-      <h2>Post Title</h2>
+      <h2>{{post.title}}</h2>
       <small>
         <i class="el-icon-time"></i>
-        {{ new Date().toLocaleString() }}
+        {{ new Date(post.date).toLocaleString() }}
       </small>
     </header>
     <div class="post-body">
       <img
-        src="https://www.hostinger.ru/rukovodstva/wp-content/uploads/sites/8/2018/08/chto-takoe-javascript.jpg"
-        alt="js"
-        class="post-image"
+        :src="post.imageUrl"
+        alt="image"
+        class="post-img"
       >
     </div>
     <footer class="post-footer">
-      <el-button round @click="openPost">Открыть</el-button>
+      <el-button round @click="openPost(post._id)">Открыть</el-button>
       <span>
-        <i class="el-icon-message"></i> 12
+        <i class="el-icon-message"></i>
+        {{ post.comments.length }}
       </span>
     </footer>
   </el-card>
@@ -29,9 +30,14 @@
 
 <script>
     export default {
+      props: {
+        post: {
+          type: Object,
+          required: true
+        }
+      },
       methods: {
-        openPost () {
-          const id = '1';
+        openPost(id) {
           this.$router.push(`/post/${id}`);
         }
       }
@@ -50,7 +56,7 @@
   }
 
   .post-img {
-    width: 100%;
+    width: 700px;
     height: auto;
   }
 

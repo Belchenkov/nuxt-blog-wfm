@@ -69,7 +69,7 @@ module.exports.addView = async (req, res) => {
   };
 
   try {
-    await Post.fineOneAndUpdate({_id: req.params.id}, {$set});
+    await Post.findOneAndUpdate({_id: req.params.id}, {$set});
     res.status(204).json();
   } catch (e) {
     res.status(500).json(e);
