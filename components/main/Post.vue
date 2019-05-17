@@ -15,7 +15,7 @@
       <img
         :src="post.imageUrl"
         alt="image"
-        class="post-img"
+        class="post-image"
       >
     </div>
     <footer class="post-footer">
@@ -55,9 +55,9 @@
     align-items: center;
   }
 
-  .post-img {
-    width: 700px;
-    height: auto;
+  .post-image {
+    width: 600px;
+    height: 400px;
   }
 
   .post-body {

@@ -103,8 +103,8 @@
   }
 
   .post-image {
-    width: 100%;
-    height: auto;
+    width: 600px;
+    height: 400px;
   }
 
   .post-content {
