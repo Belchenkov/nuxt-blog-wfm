@@ -7,11 +7,17 @@
 
 <script>
   import { Bar } from 'vue-chartjs';
+
     export default {
        layout: 'admin',
        middleware: ['admin-auth'],
        extends: Bar,
+       async asyncData({store}) {
+         const analytics = await store.dispatch('post/getAnalytics');
+         return {analytics};
+       },
        mounted() {
+         console.log(this.analytics);
          const data = {
              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
              datasets: [{
