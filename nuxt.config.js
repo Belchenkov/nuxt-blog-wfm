@@ -30,9 +30,15 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
 
   axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
+  env: {
+    appName: 'SSR Blog'
   },
 
   build: {
@@ -41,4 +47,4 @@ module.exports = {
     extend(config, ctx) {
     }
   }
-}
+};

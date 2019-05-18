@@ -6,7 +6,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+sw.*
 # Runtime data
 pids
 *.pid
@@ -82,3 +82,5 @@ dist
 
 # Service worker
 sw.*
+
+server/keys/keys.dev.js

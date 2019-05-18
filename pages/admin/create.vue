@@ -69,6 +69,9 @@
 
 <script>
   export default {
+    head: {
+      title: `Новый пост | ${process.env.appName}`
+    },
     layout: 'admin',
     middleware: ['admin-auth'],
     data() {
