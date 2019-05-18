@@ -59,6 +59,9 @@
 <script>
     export default {
       layout: 'admin',
+      head: {
+        title: `Все посты | ${process.env.appName}`
+      },
       middleware: ['admin-auth'],
       async asyncData({store}) {
         const posts = await store.dispatch('post/fetchAdmin');

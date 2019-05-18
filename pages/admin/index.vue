@@ -17,6 +17,9 @@
 <script>
   import AnalyticsChart from '@/components/admin/AnalyticsChart';
     export default {
+      head: {
+          title: `Аналитика | ${process.env.appName}`
+      },
        layout: 'admin',
        middleware: ['admin-auth'],
        components: { AnalyticsChart },

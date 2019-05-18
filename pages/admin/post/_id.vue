@@ -58,7 +58,7 @@
       middleware: ['admin-auth'],
       head() {
         return {
-          title: `Пост | ${this.post.title}`
+          title: `${this.post.title} | ${process.env.appName}`
         }
       },
       validate({params}) {

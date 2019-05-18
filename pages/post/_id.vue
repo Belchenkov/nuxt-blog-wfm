@@ -50,6 +50,11 @@
     import AppCommentForm from '@/components/main/CommentForm';
 
     export default {
+        head() {
+          return {
+            title: `${this.post.title} | ${process.env.appName}`
+          }
+        },
         validate({params}) {
           return Boolean(params.id);
         },
