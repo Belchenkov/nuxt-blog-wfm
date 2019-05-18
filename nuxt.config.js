@@ -30,10 +30,10 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
 
-  axios: {
-  },
+  axios: {},
 
   env: {
     appName: 'SSR Blog'
@@ -45,4 +45,4 @@ module.exports = {
     extend(config, ctx) {
     }
   }
-}
+};
