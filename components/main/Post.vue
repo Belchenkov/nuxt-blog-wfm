@@ -8,7 +8,7 @@
       <h2>{{post.title}}</h2>
       <small>
         <i class="el-icon-time"></i>
-        {{ new Date(post.date).toLocaleString() }}
+        {{post.date | date('date') }}
       </small>
     </header>
     <div class="post-body">
